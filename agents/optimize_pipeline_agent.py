@@ -7,7 +7,7 @@ class OptimizePipelineAgent(BaseAgent):
         self.grammar = grammar
         self.content = content
         self.match = match
-        self.jd_text = jd_text  # 直接注入 JD 描述
+        self.jd_text = jd_text
 
     async def run(self, input_bytes: bytes, stream: bool = False):
         # Step 1: Grammar
