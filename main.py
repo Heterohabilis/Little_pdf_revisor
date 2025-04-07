@@ -4,9 +4,9 @@ from dotenv import load_dotenv
 from coagent.runtimes import LocalRuntime
 from coagent.agents import ChatMessage
 
-from agents.grammar import grammar_agent
-from agents.content import content_agent
-from agents.match import match_agent
+from agents.grammar_agent import grammar_agent
+from agents.content_agent import content_agent
+from agents.match_agent import match_agent
 from utils.pdf_reader import read_pdf_text
 
 load_dotenv()
