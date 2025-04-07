@@ -5,11 +5,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+SCORE = "score"
+
 with open("prompts/score_prompt.txt", "r", encoding="utf-8") as f:
     score_prompt = f.read()
 
-match_agent = AgentSpec(
-    "match",
+score_agent = AgentSpec(
+    SCORE,
     new(
         ChatAgent,
         system=score_prompt,

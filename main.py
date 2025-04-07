@@ -7,9 +7,11 @@ from coagent.agents import ChatMessage
 from agents.grammar_agent import grammar_agent
 from agents.content_agent import content_agent
 from agents.match_agent import match_agent
+from agents.score_agent import score_agent
 from utils.pdf_reader import read_pdf_text
 
 load_dotenv()
+AGENTS = [grammar_agent, content_agent, match_agent, score_agent]
 
 def read_txt(path: str) -> str:
     """Read plain text from a .txt file."""
@@ -31,9 +33,18 @@ async def main():
 
     # === Step 3: Register agents and run them sequentially ===
     async with LocalRuntime() as runtime:
-        await runtime.register(grammar_agent)
-        await runtime.register(content_agent)
-        await runtime.register(match_agent)
+        for agent in AGENTS:
+            await runtime.register(agent)
+
+        # === Step 3.5: Score ===
+        print("\n✅ Score Result:\n")
+        score_result = await score_agent.run(
+            ChatMessage(role="user", content=resume_text).encode(),
+            stream=True,
+        )
+        async for chunk in score_result:
+            msg = ChatMessage.decode(chunk)
+            print(msg.content, end="", flush=True)
 
         # === Step 4: Grammar Optimization ===
         print("\n✅ Grammar Optimization Result:\n")

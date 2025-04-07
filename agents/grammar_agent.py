@@ -5,11 +5,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+GRAMMAR = 'grammar'
+
 with open("prompts/grammar_prompt.txt", "r", encoding="utf-8") as f:
     grammar_prompt = f.read()
 
 grammar_agent = AgentSpec(
-    "grammar",
+    GRAMMAR,
     new(
         ChatAgent,
         system= grammar_prompt,

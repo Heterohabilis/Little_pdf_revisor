@@ -5,11 +5,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+MATCH = 'match'
+
 with open("prompts/match_prompt.txt", "r", encoding="utf-8") as f:
     match_prompt = f.read()
 
 match_agent = AgentSpec(
-    "match",
+    MATCH,
     new(
         ChatAgent,
         system=match_prompt,

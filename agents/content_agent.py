@@ -5,12 +5,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+CONTENT = 'content'
+
 with open("prompts/content_prompt.txt", "r", encoding="utf-8") as f:
     content_prompt = f.read()
 
 
 content_agent = AgentSpec(
-    "content",
+    CONTENT,
     new(
         ChatAgent,
         system=content_prompt,
